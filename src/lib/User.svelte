@@ -16,13 +16,18 @@
 	{#await getUser()}
 		<p>Getting user...</p>
 	{:then { results }}
-		{#each results as { email, picture: { large }, name: { first, last } }}
+		{#each results as { email, picture: { large }, name: { first, last }, dob: { date }, phone }}
+			{@const dob = new Date(date).getFullYear()}
+			{@const year = new Date().getFullYear()}
 			<figure class="flex flex-col justify-around items-center">
 				<img class="rounded-full" src={large} alt="{first}-{last}" />
 
 				<figcaption class="flex flex-col justify-around items-center">
-					<p>{first} {last}</p>
-					<p>{email}</p>
+					<p class="font-medium text-lg text-blue-600">{first} {last}</p>
+					<a href="mailto:{email}">{email}</a>
+					<p>{dob}</p>
+					<p>{year - dob}</p>
+					<a href="tel:+{phone}">{phone}</a>
 				</figcaption>
 			</figure>
 		{:else}
