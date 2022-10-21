@@ -11,16 +11,16 @@
 	}
 </script>
 
-<section class="flex flex-col justify-around items-center border border-black border-solid rounded-md container mx-auto py-2 h-screen">
+<section class="flex flex-col justify-evenly items-center container mx-auto py-2 h-screen">
 	<h2>User</h2>
 	{#await getUser()}
 		<p>Getting user...</p>
 	{:then { results }}
 		{#each results as { email, picture: { large }, name: { first, last } }}
-			<figure>
+			<figure class="flex flex-col justify-around items-center">
 				<img class="rounded-full" src={large} alt="{first}-{last}" />
 
-				<figcaption>
+				<figcaption class="flex flex-col justify-around items-center">
 					<p>{first} {last}</p>
 					<p>{email}</p>
 				</figcaption>
